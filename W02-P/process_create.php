@@ -1,8 +1,8 @@
 <?php
   $link = mysqli_connect("localhost", "root", "123456", "dbp");
   $query = "
-    INSERT INTO topic
-      (title, description, created)
+    INSERT INTO diary
+      (title, description, date)
       VALUES (
         '{$_POST['title']}',
         '{$_POST['description']}',
@@ -18,5 +18,4 @@
   }else{
     echo '성공했습니다. <a href="index.php">돌아가기</a>';
   }
-
 ?>
