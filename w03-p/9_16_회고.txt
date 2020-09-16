@@ -1,0 +1,80 @@
++뽀모도로 공부법 :  25분 집중, 5분 휴식
+
++문제점1
+DB의 데이터를 삭제하고 다시넣고 하다보니 id가 지운거까지 포함해서 번호가 매겨지는 문제점이 발생하였다. 
+mysql> select * from topic;
++----+--------+-------------+---------------------+
+| id | title  | description | created             |
++----+--------+-------------+---------------------+
+|  1 | oracle | oracle is.. | 2020-09-16 13:01:35 |
+| 12 |        |             | 2020-09-16 12:59:51 |
++----+--------+-------------+---------------------+
+2 rows in set (0.00 sec)
+
+AUTO_INCREMENT를 초기화하는 방법을 찾았다. 
+
+mysql> SET @CNT = 0;
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> UPDATE topic SET topic.id = @CNT:=@CNT+1;
+Query OK, 1 row affected, 1 warning (0.14 sec)
+Rows matched: 2  Changed: 1  Warnings: 1
+
+mysql> select * from topic;
++----+--------+-------------+---------------------+
+| id | title  | description | created                   |
++----+--------+-------------+---------------------+
+|  1 | oracle | oracle is.. | 2020-09-16 13:01:35 |
+|  2 |          |               | 2020-09-16 12:59:51 |
++----+--------+-------------+---------------------+
+2 rows in set (0.00 sec)
+
+이렇게 두면 지운것까지 포함해서 나오는데 이 명령어를 치면 다음 오는 레코드부터 id=3이 온다. 
+mysql> ALTER TABLE topic AUTO_INCREMENT=3;
+Query OK, 0 rows affected (0.21 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
++문제점2
+이런 오류가 나고 title과 description의 데이터가 들어가지 않고 날짜만 들어갔다. 
+ppt에 있는것을 복붙해서 코드를 썼는데 '의 표기가 달라서 계속 오류가 났던것이다. 
+왠만하면 복붙하지말고 키보드로 입력해야겠다. ‘ '
+
+
++문제점3
+ppt 한 페이지씩 넘어갈 때 마다 확인하며 코딩했다. 마지막 페이지를 완료하고 하는데 
+"수정하는 과정에서 문제가 발생했습니다. "라는 오류 메세지가 떴다. 
+  $result = mysqli_multi_query($link, $query); 이렇게 써야하는것을 
+$result = mysqli_error_query($link, $query);라고 써서 계속 오류가 났었다. 
+
+
++문제점4
+update링크를 누르면 제목의 내용은 그대로 나오는데 본문의 내용이 그대로 나오지 않고 빈칸으로 되어있었다. 
+process_update와 update파일을 집중적으로 보았고 update.php 36번째 줄에서
+<p><textarea name="description" placeholder="description"?=$article['description']?></textarea></p>이라고 써서 내용부분이 나오지 않았다. 
+<p><textarea name="description" placeholder="description"><?=$article['description']?></textarea></p>이렇게 써야한다. 
+
+!아까 강의들었을 때 input은 한줄만 나타내고 input과 value는 한쌍이다, textarea은 나타낼 변수만 넣으면 된다고 필기해 놨었다. 
+직접 실습을 하기전에는 나타낼 변수만 넣으면 된다는게 무슨뜻이지? 생각했는데
+나타낼 변수를 textarea에 같이 넣는게 아니라 옆에 넣으면 된다는 것을 깨닫게 되었다. 
+
++이번 강의를 통해 페이지들을 어떻게 연결하는지 확실히 배운것같다. 기본적인 기능인 CRUD를 어떻게 구현하는지 알겠다. 
+그 전에 페이지를 만들 때 보안문제에 대해 생각해본적이 없었다. 누가 내 페이지를 해킹할거라는 생각조차 못했는데 
+정말 중요한 적용 방법이다. 대표적인 보안 문제 방지 방법 중 두가지에 대해서 배웠다. 
+첫번째는 SQL인젝션으로 사용자가 데이터를 입력할때 일부로 sql코드를 넣어 데이터의 값을 조작하는 것이다. 
+해결방법은 처음 데이터들이 들어올때 mysqli_real_escape_string()함수를 이용해 스트링 타입으로 저장해 sql문이 들어와도 작동되지 않게 만든다. 
+두번째는 크로스 사이트 스크립팅이 있다. htmlspecialchars()함수를 사용해 html문자를 일반 문자로 인식시켜 그대로 출력시키게 도와준다. 
+이러한 방식으로 안전한 웹페이지를 만들 수 있다는것을 알게되었다. 
+
++이번 강의 처음에 교수님께서 말씀해주신 뽀모도로공부법을 사용했다. 
+-쉬는 시간이 5분에서 10분으로 20분으로 점점 늘어갔다. 쉬는시간도 알람을 맞춰두고 쉬어야겠다. 
+
+재생하는거 유투브에 올리기
+링크 : 
+
+https://youtu.be/TkLmPOdzzxU 
+
+
+
+
+
