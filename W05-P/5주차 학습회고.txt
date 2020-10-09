@@ -1,0 +1,32 @@
+ - 프로젝트하던거 때문에 virtual box가 있어 새로 vmware를 깔지 않고 진행했다.
+ 하지만 Apache서버 테스트 할때 잘 되었지만 chrome에서 ip를 쳐서 했더니 연결되지 않았다. 이것을 해결못해서 너무 아쉽다. 
+
+ - php설치 시 오류가 났었다. 
+waiting for cache lock could not get lock /var/lib/dpkg/lock-frontend 
+구글링해보았더니 다른 사람도 설치하다가 그런 에러가 발생했고 모든 프로세스와 해당 디렉토리를 삭제하고 패키지를 다시 설치함으로써 해결했다. 
+sudo killall apt apt-get #모든 프로세스 죽이기
+
+#디렉토리 삭제
+sudo rm /var/lib/apt/lists/lock
+sudo rm /var/cache/apt/archives/lock
+sudo rm /var/lib/dpkg/lock*
+
+sudo dpkg --configure -a
+sudo apt update
+sudo apt upgrade
+
+!MariaDB에는 기본적으로 anonymous유저가 설치되어 있다.
+사용자 계정없이 접근할 수 있는 계정이다. 
+ftp서버에 익명으로 접속할 때 사용
+
+ - mariaDB[(none)]> select host, user from user; 하면 ERROR 1046 : No database seleted 오류 메세지가 뜬다. 
+처음 mariadb접속할때는 mariaDB[(none)]> 로 나온다. 
+이상태에서는 DB를 조회할 수 없다. 
+use mysql; 을 입력하니까 mariaDB[mysql]> 로 바뀌었다. 
+ mariaDB[mysql]> select host, user from user;하니 잘 실행되었다. 
+
+ - 과제가 chrome에서 잘 되는지를 내는거였는데 안되서 계속 구글링을 했다. 
+결국 못찾아서 VMware로 깔아서 처음부터 다시했다. 한번 더 하니까 더 이해가 잘 되는것 같다. 
+이유가 무엇인지 궁금하다.
+
+링크 : https://www.youtube.com/watch?v=gMDt2MORw0w
