@@ -1,0 +1,38 @@
+1. git에 대하여
+맨 처음 저장소를 시작할 때는 초기화하고 저장소를 설정해야 한다. 
+한번 저장소를 설정한 후에는 기존의 저장소에서 사용했던 거를 받아야한다. 기존 레파리토리에 있는 것을 다 다운받아야한다.  $Cd 저장소	$git pull origin master
+ 가장 최신의 내용을 받아옴
+
+2. Index.php에서 연봉정보 옆에 사람 수를 정한후 쿼리를 보내기 위해서는 a인 링크형이 아니라 form형태로 보내야 한다. 
+바꾸기 전 : <a href="salary_info.php">(5) 연봉 정보</a>
+form형태로 바꾼 후: 
+    <form action="salary_info.php" method="GET">
+        (5) 연봉 정보
+        <input type="text" name="number" placeholder="number">
+        <input type="submit" value="Search">
+    </form>
+
+3. php언어
+<?php   여러줄   ?>		<?=  	한줄	?>
+php코드는 c언어랑 비슷하다고 생각하면 된다.
+변수가 생성되고 데이터가 입력될 때 데이터의 타입이 정해짐(배열도 자동 정해짐)
+Var_dump(배열명) – 배열 형태로 출력
+배열 생성 방법 	(1) $foo = [1,2,3] – 예전 방식
+		(2) $bar = array(1,2,3); - 현재 방식
+Foreach는 배열의 값이 있는 동안 반복출력
+
+4. 연관 배열
+연관 배열이란 index번호가 아니라 의미가 있는 단어가 들어 갈 수 있다. 
+$alist = array('first'=>10, 'second'=>20);  - first라는 index에는 10이라는 값을 넣겠다. 
+ var_dump($alist); 
+ echo "<br><br>";
+ foreach($alist as $key => $value){
+ echo "key: {$key} value: {$value}<br />";
+ }
+
+5. 과제 : 소속부서명과 직원 이름이 출력
+Select d.dept_name, e.first_name, e.last_name
+From departments d inner join dept_manager m on d.dept_no=m.dept_no
+	Inner join employees e on e.emp_no=m.emp_no limit 5;
+로 바꾸었다. 
+
