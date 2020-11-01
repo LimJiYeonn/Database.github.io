@@ -13,3 +13,6 @@
 * 칼럼 설명
 name 책 제목 / author 책의 저자 / rating 사용자 평점 / review 리뷰수 
 price  책 가격 / year 베스트 셀러로 지정된 연도 / genre 장르(픽션/논픽션) 
+
+# 4. 구현 동영상
+<a href="https://www.youtube.com/watch?v=9esC5DdAE8E">동영상 링크</a>
