@@ -1,4 +1,4 @@
-###개발자로서의 동기부여 해주는 영상 시청하기
+### 개발자로서의 동기부여 해주는 영상 시청하기
 - ted에서 영상을 시청했습니다. 
 
 - 제목 : The mission to create a searchable database of Earth's surface (검색 가능한 지구 표면 데이터베이스를 만드는 임무)
